@@ -2,6 +2,8 @@
 
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
+const fastify = require('fastify')()
+require('dotenv').config()
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
@@ -23,3 +25,4 @@ module.exports = async function (fastify, opts) {
     options: Object.assign({}, opts)
   })
 }
+

@@ -1,22 +1,15 @@
 'use strict'
 
+const{updateComment} = require('../../model')
+
 module.exports = async function (fastify, opts) {
-    fastify.put('/:comment_id', async function (request, reply) {
-        const updateComment=[
-            {
-                id :"asdf223",
-                user_id :"2k34lkj32lj",
-                product_id : "21h3kl1h3",
-                comment :"댓글!",
-                star : 4.0
-            }
-           ] 
-     
-           reply 
-             .code(200)
-             .header('contentType','application/json')
-             .send(updateComment);
-     })
+    fastify.put('/:id', async function (request, reply) {
+        const result = await updateComment(this.mongo,request.params.id,request.body)
+        reply
+        .code(201)
+        .header('Content-Type', 'application/json; charset=utf-8')
+        .send(result)
+    })
 }
 
 

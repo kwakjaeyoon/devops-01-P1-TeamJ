@@ -1,17 +1,14 @@
 'use strict'
 
+const{deleteComment} = require('../../model')
+
 module.exports = async function (fastify, opts) {
-    fastify.delete('/:product_id', async function (request, reply) {
-        const deleteComment=[
-            {
-                "status": 200,
-	            "message": "OK"
-            }
-           ] 
-     
-           reply 
-             .code(200)
-             .header('contentType','application/json')
-             .send(deleteComment);
-     })
+  fastify.delete('/:id', async function (request, reply) {
+    
+    const result = await deleteComment(this.mongo, request.params.id);
+      reply
+      .code(204)
+      .header('Content-Type', 'application/json')
+      .send({value: result.value, ok:result.ok})
+  })
 }

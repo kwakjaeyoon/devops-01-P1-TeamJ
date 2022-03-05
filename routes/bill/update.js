@@ -1,20 +1,12 @@
 'use strict'
 
+const {updateCart} = require('../../model')
+
 module.exports = async function (fastify, opts) {
-    fastify.put('/:product_id', async function (request, reply) {
-        const productFind=[
-            {
-                id : "1a2b3c4d5e",
-			    user_id : "a1b2c3d4f5",
-			    product_id : "ffdjflk232",
-			    quantity : 2,
-			    confirm : false
-            }
-           ] 
-     
-           reply 
-             .code(200)
-             .header('contentType','application/json')
-             .send(productFind);
-     })
+    fastify.put('/:id', async function (request, reply) {
+        const result = await updateCart(this.mongo,req.params.id,req.body)
+        console.log(req.params.id)
+        console.log(req.body)
+        reply.send(result)
+    })
 }

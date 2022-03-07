@@ -43,9 +43,20 @@ module.exports = {
     return result
   },
   // 각 페이지 별로 보여져야 할 상품의 개수도 구현해야함
-  readProduct: async (mongo) => {
+  readProduct: async (mongo,offset,count) => {
+    let newOffset=parseInt(offset)
+    let newCount=parseInt(count)
     const collection = mongo.db.collection('product')
-    const result = await collection.find({}).toArray()
+    const result = await collection.find({}).skip(newOffset).limit(newCount).toArray()
+    return result
+  },
+  readCategory: async (mongo,id,offset,count) => {
+    let newOffset=parseInt(offset)
+    let newCount=parseInt(count)
+    const collection = mongo.db.collection('product')
+    const result = await collection.find({
+      category_id: id
+    }).skip(newOffset).limit(newCount).toArray()
     return result
   },
   readProductOne: async (mongo, id) => {

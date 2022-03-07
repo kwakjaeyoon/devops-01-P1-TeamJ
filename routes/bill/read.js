@@ -1,11 +1,11 @@
 'use strict'
 
-const {readCart} = require('../../model')
+const {readBill} = require('../../model')
 
 module.exports = async function (fastify, opts) {
 
   fastify.get('/', async function (request, reply) {
-      const result = await readCart(this.mongo)
+      const result = await readBill(this.mongo,request.headers.userid)
       reply.send(result)
  })
 }

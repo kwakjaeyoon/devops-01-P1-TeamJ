@@ -2,9 +2,20 @@ const { ObjectId } = require('fastify-mongodb')
 
 module.exports = {
   //Cart와 Bill 관련해서 userId 부분 수정필요
-  readCart: async (mongo) => {
+  readBill: async (mongo,id) => {
     const collection = mongo.db.collection('cart')
-    const result = await collection.find({}).toArray()
+    const result = await collection.find({
+      user_id: id,
+      confirm : true
+    }).toArray()
+    return result
+  }, 
+  readCart: async (mongo,id) => {
+    const collection = mongo.db.collection('cart')
+    const result = await collection.find({
+      user_id: id,
+      confirm : false
+    }).toArray()
     return result
   },  
   //postman 통해 req.body에 userId와 productId 같이 삽입하는 과정만 진행한 상태
@@ -35,6 +46,13 @@ module.exports = {
   readProduct: async (mongo) => {
     const collection = mongo.db.collection('product')
     const result = await collection.find({}).toArray()
+    return result
+  },
+  readProductOne: async (mongo, id) => {
+    const collection = mongo.db.collection('product')
+    const result = await collection.find({
+      _id: ObjectId(id)
+    })
     return result
   },
   updateProduct: async (mongo, id, body) => {

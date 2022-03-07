@@ -1,16 +1,10 @@
 const { ObjectId } = require('fastify-mongodb')
 
 module.exports = {
-  //Cart와 Bill 관련해서 userId 부분 수정필요
-  findUser:async (mongo,token) => {
-    const collection = mongo.db.collection('user')
-    const result = await collection.findOne({
-      token : token
-    })
-    return result.id
-  }, 
-
-  readBill: async (mongo,id) => {
+  readBill: async (mongo,token) => {
+    if(token==="aaaa") id="6221b2f420c7ac4aecff55cc"
+    else if(token==="bbbb") id="6221b37d20c7ac4aecff55ce"
+    else if(token==="cccc") id="6221b3b620c7ac4aecff55cf"
     const collection = mongo.db.collection('cart')
     const result = await collection.find({
       user_id: id,
@@ -18,7 +12,10 @@ module.exports = {
     }).toArray()
     return result
   }, 
-  readCart: async (mongo,id) => {
+  readCart: async (mongo,token) => {
+    if(token==="aaaa") id="6221b2f420c7ac4aecff55cc"
+    else if(token==="bbbb") id="6221b37d20c7ac4aecff55ce"
+    else if(token==="cccc") id="6221b3b620c7ac4aecff55cf"
     const collection = mongo.db.collection('cart')
     const result = await collection.find({
       user_id: id,
@@ -26,7 +23,6 @@ module.exports = {
     }).toArray()
     return result
   },  
-  //postman 통해 req.body에 userId와 productId 같이 삽입하는 과정만 진행한 상태
   createCart: async (mongo, body) => {
     const collection = mongo.db.collection('cart')
     const result = await collection.insertOne(body)
@@ -50,7 +46,6 @@ module.exports = {
     })
     return result
   },
-  // 각 페이지 별로 보여져야 할 상품의 개수도 구현해야함
   readProduct: async (mongo,offset,count) => {
     let newOffset=parseInt(offset)
     let newCount=parseInt(count)
@@ -69,7 +64,7 @@ module.exports = {
   },
   readProductOne: async (mongo, id) => {
     const collection = mongo.db.collection('product')
-    const result = await collection.find({
+    const result = await collection.findOne({
       _id: ObjectId(id)
     })
     return result

@@ -1,5 +1,5 @@
 'use strict'
-const {readProduct,readProductOne,readCategory} = require('../../model')
+const {readProduct,readProductOne} = require('../../model')
 
 module.exports = async function (fastify, opts) {
 

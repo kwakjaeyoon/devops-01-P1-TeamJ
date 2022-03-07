@@ -57,7 +57,6 @@ module.exports = {
   },
   updateProduct: async (mongo, id, body) => {
     const collection = mongo.db.collection('product')
-
     const result = await collection.findOneAndUpdate({
       _id: ObjectId(id)
     }, {

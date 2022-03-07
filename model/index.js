@@ -2,6 +2,14 @@ const { ObjectId } = require('fastify-mongodb')
 
 module.exports = {
   //Cart와 Bill 관련해서 userId 부분 수정필요
+  findUser:async (mongo,token) => {
+    const collection = mongo.db.collection('user')
+    const result = await collection.findOne({
+      token : token
+    })
+    return result.id
+  }, 
+
   readBill: async (mongo,id) => {
     const collection = mongo.db.collection('cart')
     const result = await collection.find({

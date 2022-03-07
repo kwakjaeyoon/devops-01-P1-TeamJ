@@ -1,12 +1,15 @@
 'use strict'
 
-const {readCart} = require('../../model')
+const {readCart,findUser} = require('../../model')
 
 module.exports = async function (fastify, opts) {
 
   fastify.get('/', async function (request, reply,err) {
   try{
-    const result = await readCart(this.mongo,request.headers.userid)
+    if(!request.headers.authorization) {throw reply.code(401).send({message:"인증정보가 입력되지 않았습니다."})}
+      const token= await findUser(this.mongo,request.headers.authorization)
+      const result = await readBill(this.mongo,token)
+    reply
       .code(200)
       .header('Content-Type', 'application/json')
       .send(result)

@@ -1,6 +1,6 @@
-# Fastify-mongodb Shopping Mall Project
+# Jib Bob App Project
 
-This project was bootstrapped with Fastify-CLI.
+
 
 ## preparation
 
@@ -43,11 +43,9 @@ Run the test cases.
 
 ![도시락](https://flexible.img.hani.co.kr/flexible/normal/704/485/imgdb/original/2020/0901/20200901503206.jpg)
 
-- 1인가구 증가로 인해 배달음식의 수요 증가
+- 1인가구 증가로 인한 반찬류 구입의 필요성과 전통시장의 활성화를 위해 편리하게 반찬을 구입하고자 함.
 
-- 전통시장의 활성화
-
-- 여러가지 반찬을 입맛대로 즐기고 싶다
+- Node.js Fastify 프레임워크를 이용하여 백엔드 API 개발을 진행하였으며, MongoDB를 이용하여 데이터베이스를 구축함.
 
                                  "전통시장 + 온라인 주문"
 
